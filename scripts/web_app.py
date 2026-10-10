@@ -106,6 +106,11 @@ if query:
 
         st.header(row["word"])
 
+
+        # ------------------------------------------
+        # 기본 정보
+        # ------------------------------------------
+
         col1, col2 = st.columns(2)
 
         with col1:
@@ -126,6 +131,103 @@ if query:
                 st.write(", ".join(parts))
             else:
                 st.write("N/A")
+
+
+        # ------------------------------------------
+        # 일반어 / 전문어 분류
+        # ------------------------------------------
+
+        classification = row.get(
+            "classification",
+            ""
+        )
+
+        domains = parse_json_field(
+            row.get(
+                "domains",
+                "[]"
+            )
+        )
+
+        primary_domains = parse_json_field(
+            row.get(
+                "primary_domains",
+                "[]"
+            )
+        )
+
+        secondary_domains = parse_json_field(
+            row.get(
+                "secondary_domains",
+                "[]"
+            )
+        )
+
+
+        st.subheader("🏷️ Classification")
+
+
+        if classification == "general":
+
+            st.success(
+                "General Word"
+            )
+
+
+        elif classification == "domain":
+
+            st.warning(
+                "Domain / Specialized Word"
+            )
+
+
+        elif classification == "mixed":
+
+            st.info(
+                "Mixed: General + Specialized Meanings"
+            )
+
+
+        elif classification == "unknown":
+
+            st.write(
+                "Unknown"
+            )
+
+
+        else:
+
+            st.write(
+                "Classification not available."
+            )
+
+
+        if domains:
+
+            st.write(
+                "**Domains:** "
+                + ", ".join(domains)
+            )
+
+
+        if primary_domains:
+
+            st.write(
+                "**Primary Domains:** "
+                + ", ".join(
+                    primary_domains
+                )
+            )
+
+
+        if secondary_domains:
+
+            st.write(
+                "**Secondary Domains:** "
+                + ", ".join(
+                    secondary_domains
+                )
+            )
 
 
         # ------------------------------------------
