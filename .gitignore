@@ -1,0 +1,17 @@
+# Large raw datasets
+data/*.gz
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+
+# Virtual environments
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
